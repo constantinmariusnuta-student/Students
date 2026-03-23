@@ -26,11 +26,11 @@ public class Application {
         afiseaza(students);
         System.out.println();
     }
-    System.out.println();
 
     private static void afiseaza(List<Student> students) {
         for (Student s : students)
             System.out.println(s);
     }
-    System.out.println(new Student(null,"Ioan","Popa","TI_21/1"),lista));
+   /* System.out.println(new Student(null,"Ioan","Popa","TI_21/1"),lista));*/
+
 }

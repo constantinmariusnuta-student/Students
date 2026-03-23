@@ -8,6 +8,7 @@ public class Student {
     String nume;
     String formațieDeStudiu;
 
+
     public Student(int numarMatricol, String prenume, String nume, String formațieDeStudiu) {
         this.numarMatricol = numarMatricol;
         this.prenume = prenume;
@@ -32,13 +33,13 @@ public class Student {
     }
 
 
-    public static boolean prezent(Student student, List<Student> studenti) {
+    /*public static boolean prezent(Student student, List<Student> studenti) {
         for (Student s : studenti) {
             if (s.getPrenume().equalsIgnoreCase(student.getPrenume()) && s.getNume().equalsIgnoreCase(student.getNume()))
                 return true;
         }
         return false;
-    }
+    }*/
 
     @Override
     public String toString() {

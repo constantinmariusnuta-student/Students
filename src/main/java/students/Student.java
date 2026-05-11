@@ -1,20 +1,20 @@
 package students;
 
-import java.util.List;
 
 public class Student {
     int numarMatricol;
     String prenume;
     String nume;
-    String formațieDeStudiu;
+    String formatieDeStudiu;
 
 
-    public Student(int numarMatricol, String prenume, String nume, String formațieDeStudiu) {
+    public Student(int numarMatricol, String prenume, String nume, String formatieDeStudiu) {
         this.numarMatricol = numarMatricol;
         this.prenume = prenume;
         this.nume = nume;
-        this.formațieDeStudiu = formațieDeStudiu;
+        this.formatieDeStudiu = formatieDeStudiu;
     }
+
 
     public int getNumarMatricol() {
         return numarMatricol;
@@ -28,27 +28,19 @@ public class Student {
         return nume;
     }
 
-    public String getFormațieDeStudiu() {
-        return formațieDeStudiu;
+    public String getFormatieDeStudiu() {
+        return formatieDeStudiu;
     }
 
-
-    /*public static boolean prezent(Student student, List<Student> studenti) {
-        for (Student s : studenti) {
-            if (s.getPrenume().equalsIgnoreCase(student.getPrenume()) && s.getNume().equalsIgnoreCase(student.getNume()))
-                return true;
-        }
-        return false;
-    }*/
+    public String toCSV() {
+        return numarMatricol + "," +
+                prenume + "," +
+                nume + "," +
+                formatieDeStudiu;
+    }
 
     @Override
     public String toString() {
-//    return "Student{" +
-//            "numarMatricol=" + numarMatricol +
-//            ", prenume='" + prenume + '\'' +
-//            ", nume='" + nume + '\'' +
-//            ", formațieDeStudiu='" + formațieDeStudiu + '\'' +
-//            '}';
-        return String.format("%5d %10s %10s %8s", numarMatricol, prenume, nume, formațieDeStudiu);
+        return String.format("%5d %10s %10s %8s", numarMatricol, prenume, nume, formatieDeStudiu);
     }
 }

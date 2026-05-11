@@ -1,36 +1,62 @@
 package students;
 
-import java.lang.Object;
+import java.io.*;
 import java.util.*;
 
 public class Application {
+
     static void main() {
-        Student s1 = new Student(112, "Ioan", "Popa", "TI21/1");
-        Student s2 = new Student(112, "Maria", "Oprea", "TI21/1");
-        Student s3 = new Student(120, "Alis", "Popa", "TI21/2");
-        Student s4 = new Student(122, "Mihai", "Vecerdea", "TI22/1");
-        Student s5 = new Student(122, "Eugen", "Uritescu", "TI22/2");
-        List<Student> students = new ArrayList();
-        System.out.println(students.size());
-        students.add(s1);
-        students.add(s2);
-        students.add(s3);
-        students.add(s4);
-        students.add(s5);
-        System.out.println(students.size());
-        System.out.println(s1);
-        System.out.println(s2);
-        System.out.println(s3);
-        System.out.println(s4);
-        System.out.println(s5);
+
+        List<Student> students = new ArrayList<>();
+        try (BufferedReader br =
+                     new BufferedReader(new FileReader("student.csv"))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+
+                String[] values = line.split(",");
+                int nrMatricol = Integer.parseInt(values[0].trim());
+                String prenume = values[1].trim();
+                String nume = values[2].trim();
+                String grupa = values[3].trim();
+
+                Student s = new Student(
+                        nrMatricol,
+                        prenume,
+                        nume,
+                        grupa
+                );
+
+                students.add(s);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         afiseaza(students);
-        System.out.println();
+
+        try (BufferedWriter bw =
+                     new BufferedWriter(new FileWriter("output.csv"))) {
+
+            for (Student s : students) {
+                bw.write(s.toCSV());
+                bw.newLine();
+            }
+
+            System.out.println("\nFisier exportat!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ExcelExporter.export(students);
     }
+
 
     private static void afiseaza(List<Student> students) {
-        for (Student s : students)
-            System.out.println(s);
-    }
-   /* System.out.println(new Student(null,"Ioan","Popa","TI_21/1"),lista));*/
 
+        for (Student s : students) {
+            System.out.println(s);
+        }
+    }
 }

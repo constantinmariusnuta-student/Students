@@ -5,9 +5,10 @@ import java.util.*;
 
 public class Application {
 
-    static void main() {
+    public static void main(String[] args) {
 
         List<Student> students = new ArrayList<>();
+        Map<Integer, Integer> note = new HashMap<>();
         try (BufferedReader br =
                      new BufferedReader(new FileReader("student.csv"))) {
 
@@ -19,12 +20,14 @@ public class Application {
                 String prenume = values[1].trim();
                 String nume = values[2].trim();
                 String grupa = values[3].trim();
+                int nota = Integer.parseInt(values[4].trim());
 
                 Student s = new Student(
                         nrMatricol,
                         prenume,
                         nume,
-                        grupa
+                        grupa,
+                        nota
                 );
 
                 students.add(s);
@@ -49,14 +52,35 @@ public class Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         ExcelExporter.export(students);
     }
 
 
     private static void afiseaza(List<Student> students) {
-
+        System.out.println("Studentii");
         for (Student s : students) {
             System.out.println(s);
         }
+
+        System.out.println("\ntudenti cu nota 10:");
+        for (Student s : students) {
+            if (s.nota() == 10) {
+                System.out.println(s);
+            }
+        }
+
+        System.out.println("\nStudenti cu nota mai mica sau egala cu 4:");
+        for (Student s : students) {
+            if (s.nota() <= 4) {
+                System.out.println(s);
+            }
+        }
+        System.out.println("\nMedia notelor");
+        float suma = 0;
+        for (Student s : students) {
+             suma += s.nota();
+        }
+        System.out.println("Media notelor: " + suma / students.size());
     }
 }

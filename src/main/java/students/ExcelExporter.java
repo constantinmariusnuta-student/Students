@@ -21,15 +21,17 @@ public class ExcelExporter {
         header.createCell(1).setCellValue("Prenume");
         header.createCell(2).setCellValue("Nume");
         header.createCell(3).setCellValue("Grupa");
+        header.createCell(4).setCellValue("Nota");
 
         // data
         for (Student s : students) {
             Row row = sheet.createRow(rowIndex++);
 
-            row.createCell(0).setCellValue(s.getNumarMatricol());
-            row.createCell(1).setCellValue(s.getPrenume());
-            row.createCell(2).setCellValue(s.getNume());
-            row.createCell(3).setCellValue(s.getFormatieDeStudiu());
+            row.createCell(0).setCellValue(s.numarMatricol());
+            row.createCell(1).setCellValue(s.prenume());
+            row.createCell(2).setCellValue(s.nume());
+            row.createCell(3).setCellValue(s.formatieDeStudiu());
+            row.createCell(4).setCellValue(s.nota());
         }
 
         try (FileOutputStream fos = new FileOutputStream("output.xlsx")) {
